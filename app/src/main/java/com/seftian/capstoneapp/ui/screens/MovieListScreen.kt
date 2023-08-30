@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.seftian.capstoneapp.MainViewModel
+import com.seftian.capstoneapp.ui.screens.viewmodels.MainViewModel
 import com.seftian.capstoneapp.data.remote.network.MovieApi
 import com.seftian.capstoneapp.domain.ResourceState
 import com.seftian.capstoneapp.domain.model.MovieItem

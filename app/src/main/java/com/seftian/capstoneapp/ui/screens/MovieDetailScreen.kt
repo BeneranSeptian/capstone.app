@@ -36,7 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.seftian.capstoneapp.DetailViewModel
+import com.seftian.capstoneapp.ui.screens.viewmodels.DetailViewModel
 import com.seftian.capstoneapp.data.remote.network.MovieApi
 import com.seftian.capstoneapp.domain.ResourceState
 import com.seftian.capstoneapp.domain.model.MovieDetail

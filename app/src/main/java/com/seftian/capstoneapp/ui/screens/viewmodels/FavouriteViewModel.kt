@@ -1,4 +1,4 @@
-package com.seftian.capstoneapp
+package com.seftian.capstoneapp.ui.screens.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

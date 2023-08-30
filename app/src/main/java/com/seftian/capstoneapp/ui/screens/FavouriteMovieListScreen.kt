@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.seftian.capstoneapp.FavouriteViewModel
+import com.seftian.capstoneapp.ui.screens.viewmodels.FavouriteViewModel
 import com.seftian.capstoneapp.ui.Screens
 import com.seftian.capstoneapp.ui.screens.components.Section
 
