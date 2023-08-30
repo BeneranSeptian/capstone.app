@@ -2,13 +2,15 @@ package com.seftian.capstoneapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.seftian.capstoneapp.data.local.dao.GamesDao
-import com.seftian.capstoneapp.data.local.entity.GamesEntity
+import androidx.room.TypeConverters
+import com.seftian.capstoneapp.data.local.dao.MoviesDao
+import com.seftian.capstoneapp.data.local.entity.MoviesEntity
 
 @Database(
-    entities = [GamesEntity::class],
+    entities = [MoviesEntity::class],
     version = 1
 )
+@TypeConverters(GenreConverter::class)
 abstract class CapstoneAppDb: RoomDatabase() {
-    abstract val gamesDao: GamesDao
+    abstract val moviesDao: MoviesDao
 }

@@ -1,49 +1,55 @@
 package com.seftian.capstoneapp
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.seftian.capstoneapp.data.ResourceState
-import com.seftian.capstoneapp.domain.model.Game
-import com.seftian.capstoneapp.domain.model.GameDetail
-import com.seftian.capstoneapp.domain.usecase.GamesUseCase
+import com.seftian.capstoneapp.domain.ResourceState
+import com.seftian.capstoneapp.domain.model.MovieItem
+import com.seftian.capstoneapp.domain.usecase.MoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val gamesUseCase: GamesUseCase
+    private val moviesUseCase: MoviesUseCase
 ) : ViewModel() {
 
-    private val _games = MutableLiveData<List<Game>>()
-    val games get() = _games
+
+    private val _topRatedMovies = MutableStateFlow<ResourceState<List<MovieItem>>>(ResourceState.Loading)
+    val topRatedMovies get() = _topRatedMovies
+
+    private val _upcomingMovies = MutableStateFlow<ResourceState<List<MovieItem>>>(ResourceState.Loading)
+    val upcomingMovies get() = _upcomingMovies
+
+    private val _searchedMovies = MutableStateFlow<ResourceState<List<MovieItem>>>(ResourceState.Loading)
+    val searchedMovies get() = _searchedMovies
 
     init {
         viewModelScope.launch {
-            gamesUseCase.getAllGames().collectLatest {
-                _games.value = it
+            moviesUseCase.getMovies("top_rated").collectLatest {
+                _topRatedMovies.value = it
+            }
+
+            moviesUseCase.getMovies("upcoming").collectLatest {
+                _upcomingMovies.value = it
             }
         }
     }
 
-    fun refreshGame() {
+
+    fun searchMovies(query: String){
         viewModelScope.launch {
-            gamesUseCase.refreshGames()
+            moviesUseCase.searchMovies(query).collectLatest {
+                _searchedMovies.value = it
+            }
         }
     }
 
-    private val _gameDetailState = MutableStateFlow<ResourceState<GameDetail>>(ResourceState.Loading)
-    val gameDetailState: StateFlow<ResourceState<GameDetail>> = _gameDetailState
-
-    fun getGameDetail(id: Int) {
+    fun insertMovie(movie: MovieItem){
         viewModelScope.launch {
-            gamesUseCase.getDetailGame(id).collect { state ->
-                _gameDetailState.value = state
-            }
+            moviesUseCase.insertMovie(movie)
         }
     }
 }

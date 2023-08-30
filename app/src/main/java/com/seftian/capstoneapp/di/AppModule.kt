@@ -2,14 +2,14 @@ package com.seftian.capstoneapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.seftian.capstoneapp.data.remote.network.Api
 import com.seftian.capstoneapp.BuildConfig
-import com.seftian.capstoneapp.data.GamesRepository
+import com.seftian.capstoneapp.data.MoviesRepository
 import com.seftian.capstoneapp.data.local.CapstoneAppDb
 import com.seftian.capstoneapp.data.local.LocalDataSource
-import com.seftian.capstoneapp.data.remote.RemoteDataSource
-import com.seftian.capstoneapp.domain.usecase.GameInteractor
-import com.seftian.capstoneapp.domain.usecase.GamesUseCase
+import com.seftian.capstoneapp.data.remote.MovieRemoteDataSource
+import com.seftian.capstoneapp.data.remote.network.MovieApi
+import com.seftian.capstoneapp.domain.usecase.MoviesInteractor
+import com.seftian.capstoneapp.domain.usecase.MoviesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +28,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApi(): Api {
+    fun provideMovieApi(): MovieApi {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
@@ -39,13 +39,9 @@ object AppModule {
 
         val apiKeyInterceptor = Interceptor { chain ->
             val originalRequest = chain.request()
-            val originalUrl = originalRequest.url
-            val newUrl = originalUrl.newBuilder()
-                .addQueryParameter("key", BuildConfig.API_KEY)
-                .build()
 
             val modifiedRequest = originalRequest.newBuilder()
-                .url(newUrl)
+                .header("Authorization", "Bearer ${BuildConfig.API_KEY}")
                 .build()
 
             chain.proceed(modifiedRequest)
@@ -57,11 +53,11 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(Api.BASE_URL)
+            .baseUrl(MovieApi.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(Api::class.java)
+            .create(MovieApi::class.java)
     }
 
     @Provides
@@ -76,28 +72,29 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(capstoneAppDb: CapstoneAppDb): LocalDataSource {
-        return LocalDataSource(capstoneAppDb.gamesDao)
+    fun provideLocalDataSource(capstoneAppDb: CapstoneAppDb): LocalDataSource{
+        return LocalDataSource(capstoneAppDb.moviesDao)
     }
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(api: Api): RemoteDataSource {
-        return RemoteDataSource(api)
+    fun provideMovieRemoteDataSource(movieApi: MovieApi): MovieRemoteDataSource {
+        return MovieRemoteDataSource(movieApi)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideMoviesRepository(
+        movieRemoteDataSource: MovieRemoteDataSource,
+        localDataSource: LocalDataSource
+    ): MoviesRepository {
+        return MoviesRepository(movieRemoteDataSource, localDataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGameRepository(
-        localDataSource: LocalDataSource,
-        remoteDataSource: RemoteDataSource
-    ): GamesRepository {
-        return GamesRepository(localDataSource, remoteDataSource)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGamesUseCase(gamesRepository: GamesRepository): GamesUseCase {
-        return GameInteractor(gamesRepository)
+    fun provideMoviesUsecase(moviesRepository: MoviesRepository): MoviesUseCase {
+        return MoviesInteractor(moviesRepository)
     }
 }

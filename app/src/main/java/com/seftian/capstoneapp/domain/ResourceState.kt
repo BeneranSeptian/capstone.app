@@ -1,4 +1,4 @@
-package com.seftian.capstoneapp.data
+package com.seftian.capstoneapp.domain
 
 sealed class ResourceState<out T: Any>{
     data class Success<out T : Any>(val data: T) : ResourceState<T>()
