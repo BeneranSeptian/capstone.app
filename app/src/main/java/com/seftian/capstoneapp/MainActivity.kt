@@ -70,7 +70,7 @@ fun MainApp(
     )
     Scaffold(
         bottomBar = {
-            if(currentRoute != Screens.DetailGame.route){
+            if(currentRoute != Screens.DetailMovie.route){
                 androidx.compose.material3.NavigationBar(
                     containerColor = MaterialTheme.colorScheme.primary,
                 ) {
@@ -104,7 +104,7 @@ fun MainApp(
                         navController = navHostController
                     )
                 }
-                composable(Screens.DetailGame.route){backStackEntry->
+                composable(Screens.DetailMovie.route){ backStackEntry->
                     val id = backStackEntry.arguments?.getString("id")
                     if (id != null) {
                         MovieDetailScreen(id = id)

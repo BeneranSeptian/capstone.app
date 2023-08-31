@@ -21,7 +21,7 @@ fun FavouriteMovieListScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Section(movieList = favouriteMovies.value, onClickItem = {
-            navController.navigate(Screens.DetailGame.withId(it))
+            navController.navigate(Screens.DetailMovie.withId(it))
         })
     }
 }

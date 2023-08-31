@@ -110,7 +110,7 @@ fun MovieListScreen(
             Section(
                 movieList = searchedMovieState.value,
                 onClickItem = {
-                    navController.navigate(Screens.DetailGame.withId(it))
+                    navController.navigate(Screens.DetailMovie.withId(it))
                 },
                 insertMovie = {
                     viewModel.insertMovie(it)
@@ -138,7 +138,7 @@ fun MovieListScreen(
                                 .fillMaxWidth()
                                 .height(boxHeight)
                                 .clickable {
-                                    navController.navigate(Screens.DetailGame.withId(it.id.toString()))
+                                    navController.navigate(Screens.DetailMovie.withId(it.id.toString()))
                                 }
                         ) {
                             it.title.let { it1 ->
@@ -157,7 +157,7 @@ fun MovieListScreen(
             Text("Top Rated Movies", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(12.dp))
             Section(movieList = movieStateTopRated.value, onClickItem = {
-                navController.navigate(Screens.DetailGame.withId(it))
+                navController.navigate(Screens.DetailMovie.withId(it))
             })
         }
     }
