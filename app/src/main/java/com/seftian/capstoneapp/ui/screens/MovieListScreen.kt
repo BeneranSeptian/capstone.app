@@ -1,5 +1,7 @@
 package com.seftian.capstoneapp.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -32,18 +34,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.seftian.capstoneapp.ui.screens.viewmodels.MainViewModel
-import com.seftian.capstoneapp.data.remote.network.MovieApi
-import com.seftian.capstoneapp.domain.ResourceState
-import com.seftian.capstoneapp.domain.model.MovieItem
 import com.seftian.capstoneapp.ui.Screens
 import com.seftian.capstoneapp.ui.screens.components.ImageWithUrl
 import com.seftian.capstoneapp.ui.screens.components.Section
+import com.seftian.capstoneapp.ui.screens.viewmodels.MainViewModel
+import com.seftian.core.data.remote.network.MovieApi
+import com.seftian.core.domain.ResourceState
+import com.seftian.core.domain.model.MovieItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,7 +99,9 @@ fun MovieListScreen(
             )
             Spacer(modifier = Modifier.width(8.dp))
             Button(
-                onClick = { viewModel.searchMovies(searchText.value) },
+                onClick = {
+                          viewModel.searchMovies(searchText.value)
+                },
                 modifier = Modifier.weight(0.3f),
                 shape = RoundedCornerShape(8.dp)
             ) {

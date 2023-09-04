@@ -21,7 +21,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "API_KEY", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjIzODEyZmVkYmYyNzE2ZTczNGEyY2UxOGYyMjU0NCIsInN1YiI6IjY0MTk4NmUzZTc0MTQ2MDA4MjE4MjcyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.htX9Yj2twB-q6CExqZ8GqNZIrXI5RfrfskK2ey9_7gc\"")
     }
 
     buildTypes {
@@ -55,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")

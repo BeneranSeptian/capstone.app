@@ -37,10 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.seftian.capstoneapp.ui.screens.viewmodels.DetailViewModel
-import com.seftian.capstoneapp.data.remote.network.MovieApi
-import com.seftian.capstoneapp.domain.ResourceState
-import com.seftian.capstoneapp.domain.model.MovieDetail
 import com.seftian.capstoneapp.ui.screens.components.ImageWithUrl
+import com.seftian.core.data.remote.network.MovieApi
+import com.seftian.core.domain.ResourceState
+import com.seftian.core.domain.model.MovieDetail
 
 @Composable
 fun MovieDetailScreen(

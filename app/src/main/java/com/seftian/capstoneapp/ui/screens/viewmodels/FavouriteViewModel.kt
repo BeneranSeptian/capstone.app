@@ -2,8 +2,8 @@ package com.seftian.capstoneapp.ui.screens.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.seftian.capstoneapp.domain.model.MovieItem
-import com.seftian.capstoneapp.domain.usecase.MoviesUseCase
+import com.seftian.core.domain.model.MovieItem
+import com.seftian.core.domain.usecase.MoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest

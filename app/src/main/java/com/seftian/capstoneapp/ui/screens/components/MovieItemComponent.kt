@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.seftian.capstoneapp.data.remote.network.MovieApi
-import com.seftian.capstoneapp.domain.model.MovieItem
+import com.seftian.core.data.remote.network.MovieApi
+import com.seftian.core.domain.model.MovieItem
 
 @Composable
 fun MovieItemComponent(
